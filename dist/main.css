@@ -4,3 +4,7 @@
 .gui-enter, .gui-leave{height: 0; opacity: 0;}
 .table tbody tr{transition: all .3s ease}
 .table tbody tr:hover{transition: background: #ddd;}
+.re{color: #4caf50;}
+.end{color: #e81818;}
+
+.jumbotron h1.new-title, .jumbotron input.new-title{text-align: center; font-size: 24px;}

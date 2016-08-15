@@ -17,8 +17,9 @@
 						<th><input type="checkbox"></th>
 						<th>{{item.title}}</th>
 						<th>{{item.timeStart}}</th>
-						<th v-if="item.state">已发布</th>
-						<th v-else>发布中</th>
+						<th v-if="item.state==rel">已发布</th>
+						<th v-if="item.state==on" class="re">发布中</th>
+						<th v-if="item.state==end" class="end">结束</th>
 						<th>
 							<a href="">编辑</a>
 							<a href="">删除</a>

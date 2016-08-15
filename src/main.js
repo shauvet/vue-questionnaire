@@ -5,6 +5,7 @@ import App from './components/app.vue';
 import List from './components/list.vue';
 import Home from './components/home.vue';
 import None from './components/404.vue';
+import New from './components/new.vue';
 
 vue.use(Router);
 
@@ -22,6 +23,10 @@ router.map({
 	'/list': {
 		name: 'list',
 		component: List
+	},
+	'/new': {
+		name: 'new',
+		component: New
 	}
 })
 router.redirect({

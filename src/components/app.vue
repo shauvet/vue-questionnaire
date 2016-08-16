@@ -11,7 +11,7 @@
 	</div>
 </template>
 <script type="text/javascript">
-	import navs from './nav.vue';
+	import navs from './nav';
 
 	export default {
 		components: {

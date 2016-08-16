@@ -69,15 +69,15 @@
 			}
 		},
 		methods: {
-			me() {
+			me: function() {
 				this.n_btn: false
 			},
-			mes(e) {
+			mes: function(e) {
 				let el = e.currentTarget;
 				this.n_btn = true;
 				el.select();
 			},
-			n_add_t_c() {
+			n_add_t_c: function() {
 				this.n_add_t = true;
 			}
 		},
@@ -93,14 +93,14 @@
 					'<span class="{{class}}" v-if="!editing" @click="edit">{{text}}</span>' + 
 					'<input type="text" class="iclass" v-el:input v-if="editing" @blur="blur" v-model="text"/>',
 				methods: {
-					edit() {
+					edit: function() {
 						this.editing = true;
 						//dom有变化立即执行
 						this.$nextTick(function() {
 							this.$els.input.select();
 						})
 					},
-					blur() {
+					blur: function() {
 						let ntext = this.text;
 						this.editing = false;
 						if (this.text == '') {

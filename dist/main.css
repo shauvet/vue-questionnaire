@@ -9,20 +9,3 @@ ul, li{list-style-type: none;}
 .table tbody tr:hover{transition: background: #ddd;}
 .re{color: #4caf50;}
 .end{color: #e81818;}
-
-#new h1.new-title, #new input.new-title{text-align: center; font-size: 24px; margin: 0;}
-#new h1.new-title{height: 3rem; padding-top: .2rem; line-height: 1.5;}
-#new h1.new-title:hover{background-color: #fff;}
-#new input.new-title{padding: 0; border: 0;}
-
-#new .content{margin-top: 1rem; margin-bottom: 1rem; padding: 2rem; border-top: .2rem solid #ccc; border-bottom: .2rem solid #ccc;}
-#new .adds{margin-top: 1rem; border: .1rem solid #ccc;}
-#new .content .add{height: 8rem; line-height: 8rem; background-color: #ddd; color: #777; font-size: 2.4rem; text-align: center; cursor: pointer;}
-#new .content .adds .btns{position: relative; width: 20rem; margin: 1rem auto;}
-#new .content .question>div{transition: .3s all; position: relative; padding: 1rem;}
-#new .content .question>div:hover{background-color: #dedede;}
-#new .content .question ul{padding-left: 3rem;}
-#new .content .question input{margin-right: .5rem;}
-#new .content .question textarea{width: 100%;}
-#new .content .question>div.btns{position: absolute; top: 2rem; right: 0; font-size: 1.6rem;}
-#new .content .question>div.btns .required{top: 2rem;}

@@ -1,11 +1,13 @@
 import vue from 'vue';
 import Router from 'vue-router';
-import data from './data.js';
-import App from './components/app.vue';
-import List from './components/list.vue';
-import Home from './components/home.vue';
-import None from './components/404.vue';
-import New from './components/new.vue';
+
+import data from './data';
+
+import App from './components/app';
+import List from './components/list';
+import Home from './components/home';
+import None from './components/404';
+import New from './components/new';
 
 vue.use(Router);
 

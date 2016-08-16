@@ -1,3 +1,5 @@
+var webpack = require('webpack');
+
 module.exports = {
 	entry: './src/main.js',
 	output: {
@@ -13,11 +15,7 @@ module.exports = {
 			{test: /\.css$/, loader: 'style!css!autoprefixer'}
 		]
 	},
-	vue: {
-		loaders: {
-			css: 'style!css!autoprefixer'
-		}
-	},
+	
 	babel: {
 		presets: ['es2015', 'stage-0'],
 		plugins: ['transform-runtime']

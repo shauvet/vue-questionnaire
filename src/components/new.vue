@@ -22,7 +22,12 @@
 		</div>
 		<div class="footer">
 			<date></date>
+			<div class="btns">
+				<button class="btn btn-default btn-sm" type="button">保存问卷</button>
+				<button class="btn btn-default btn-sm" type="button">提交问卷</button>
+			</div>
 		</div>
+		{{que | json}}
 	</div>
 </template>
 <script>
@@ -74,15 +79,5 @@ import question from './question';
 #new .adds{margin-top: 1rem; border: .1rem solid #ccc;}
 #new .content .add{height: 8rem; line-height: 8rem; background-color: #ddd; color: #777; font-size: 2.4rem; text-align: center; cursor: pointer;}
 #new .content .adds .btns{position: relative; width: 20.5rem; margin: 1rem auto;}
-#new .content .questions>div.question{transition: .3s all; position: relative; padding: 1rem;}
-#new .content .questions>div.question:hover{background-color: #dedede;}
-#new .content .questions ul{padding-left: 3rem;}
-#new .content .questions li.q_add{cursor: pointer; text-align: center; font-size: 1.8rem; border: .2rem dashed #ccc; box-shadow: 1rem; border-radius: .2rem; opacity: 0;}
-#new .content .questions li.q_add:hover{opacity: 1;}
-#new .content .questions input{margin-right: .5rem;}
-#new .content .questions textarea{width: 100%;}
-#new .content .questions .required{position: absolute; top: .5rem; right: 1rem; height: 0; font-size: 1rem;}
-#new .content .questions .fun{position: absolute; bottom: 2rem; right: 1rem; height: 0; font-size: 1rem;}
-#new .content .questions .question h4{height: 2rem;}
-#new .content .questions .question input{width: auto; border: 0;}
+#new .footer .btns{float: right;}
 </style>

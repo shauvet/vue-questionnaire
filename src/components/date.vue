@@ -64,24 +64,30 @@
 			add: function(d) {
 				if (d == 'y') {
 					this.year++;
+					this.datas();
 				} else {
 					if (this.month == 12) {
 						this.year++;
 						this.month = 1;
+						this.datas();
 					} else {
 						this.month++;
+						this.datas();
 					}
 				}
 			},
 			subtract: function(d) {
 				if (d == 'y') {
 					this.year--;
+					this.datas();
 				} else {
 					if (this.month == 1) {
 						this.year--;
 						this.month = 12;
+						this.datas();
 					} else {
 						this.month--;
+						this.datas();
 					}
 				}
 			},
@@ -124,6 +130,7 @@
 	}
 </script>
 <style>
+	.date{display: inline-block;}
 	.date .date-panel{width: 34rem; height: 37rem; text-align: center;}
 	.date .date-panel-head{font-size: 2.4rem;}
 	.date .table ul{padding: 0; margin: 0;}

@@ -1,70 +1,41 @@
 <template>
-	<div class="n_radio question" v-if="type=='radio">
+	<div class="n_radio question">
 		<h4>
-			Q{{index}} (单选题)
+			<template v-if="type=='radio'">
+				Q{{index}} (单选题)
+			</template>
+			<template v-if="type=='checkbox'">
+				Q{{index}} (多选题)
+			</template>
+			<template v-if="type=='textarea'">
+				Q{{index}} (文本题)
+			</template>
 			<span>
 				<n_title :text='"请输入标题"'></n_title>
 			</span>
 		</h4>
 		<ul>
-			<template v-for="item in items">
+			<template v-for="item in items" v-if="type=='radio'">
 				<li>
 					<span class="glyphicon glyphicon-unchecked"></span>
 					<n_title :text="item.title" :class="''" :iclass="''"></n_title>
-					<span class="glyphicon glyphicon-remove"></span>
+					<span class="glyphicon glyphicon-remove" @click="pr_del($index)"></span>
 				</li>
 			</template>
-			<li class="q_add">+</li>
-		</ul>
-		<div class="required btns">
-			<input type="checkbox" name="question"><span>此题是否必填</span>
-		</div>
-		<div class="fun btns">
-			<span>上移</span>
-			<span>下移</span>
-			<span>复用</span>
-			<span>删除</span>
-		</div>
-	</div>
-	<div class="n_checkbox question" v-if="type=='checkbox'">
-		<h4>
-			Q{{index}} (多选题)
-			<span>
-				<n_title :text='"请输入标题"'></n_title>
-			</span>
-		</h4>
-		<ul>
-			<template v-for="item in items">
+			<template v-for="item in items" v-if="type=='checkbox'">
 				<li>
 					<span class="glyphicon glyphicon-record"></span>
 					<n_title :text="item.title" :class="''" :iclass="''"></n_title>
-					<span class="glyphicon glyphicon-remove"></span>
+					<span class="glyphicon glyphicon-remove" @click="pr_del($index)"></span>
 				</li>
 			</template>
-			<li class="q_add">+</li>
+			<template v-for="item in items" v-if="type=='textarea'">
+				<li><span class="glyphicon glyphicon-align-justify"></span></li>
+			</template>
+			<li class="q_add" @click="pr_add" v-if="type=='radio' || type=='checkbox'">+</li>
 		</ul>
 		<div class="required btns">
-			<input type="checkbox" name="question"><span>此题是否必填</span>
-		</div>
-		<div class="fun btns">
-			<span>上移</span>
-			<span>下移</span>
-			<span>复用</span>
-			<span>删除</span>
-		</div>
-	</div>
-	<div class="n_textarea question" v-if="type=='textarea'">
-		<h4>
-			Q{{index}} (文本题)
-			<span>
-				<n_title :text='"请输入标题"'></n_title>
-			</span>
-		</h4>
-		<ul>
-			<li><span class="glyphicon glyphicon-align-justify"></span></li>
-		</ul>
-		<div class="required btns">
-			<input type="checkbox" name="question"><span>此题是否必填</span>
+			<input type="checkbox" name="required" v-model="required" :true="true" :false="false"><span>此题是否必填</span>
 		</div>
 		<div class="fun btns">
 			<span>上移</span>
@@ -84,7 +55,7 @@
 					{'title': '问题1'}，
 					{'title': '问题2'}
 				],
-				abc: '123'
+				required: false
 			}
 		},
 		props: {
@@ -93,10 +64,30 @@
 		},
 		components: {
 			n_title
+		},
+		methods: {
+			pr_add: function () {
+				this.items.push({'title': '问题'});
+			},
+			pr_del: function (index) {
+				this.items.splice(index, 1);
+			}
 		}
 	}
 </script>
 <style>
-	.glyphicon-remove{cursor: pointer;}
-	.glyphicon-align-justify{font-size: 4.6rem;}
+.glyphicon-remove{cursor: pointer;}
+.glyphicon-align-justify{font-size: 4.6rem;}
+
+#new .content .questions>div.question{transition: .3s all; position: relative; padding: 1rem;}
+#new .content .questions>div.question:hover{background-color: #dedede;}
+#new .content .questions ul{padding-left: 3rem;}
+#new .content .questions li.q_add{cursor: pointer; text-align: center; font-size: 1.8rem; border: .2rem dashed #ccc; box-shadow: 1rem; border-radius: .2rem; opacity: 0;}
+#new .content .questions li.q_add:hover{opacity: 1;}
+#new .content .questions input{margin-right: .5rem;}
+#new .content .questions textarea{width: 100%;}
+#new .content .questions .required{position: absolute; top: .5rem; right: 1rem; height: 0; font-size: 1rem;}
+#new .content .questions .fun{position: absolute; bottom: 2rem; right: 1rem; height: 0; font-size: 1rem;}
+#new .content .questions .question h4{height: 2rem;}
+#new .content .questions .question input{width: auto; border: 0;}
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<div class="date">
-		<input type="text" class="form-control" placeholder="date" aria-describedby="basic-addon1" @click="datas" v-el:input>
+		<input type="text" class="form-control" placeholder="date" aria-describedby="basic-addon1" @click="datas" v-el:input v-model="date" readonly="readonly">
 		<div class="panel panel-primary date-panel" v-show="btn">
 			<div class="panel-heading date-panel-head">
 				<span class="glyphicon glyphicon-chevron-left" @click="subtract('y')"></span>
@@ -52,6 +52,7 @@
 		data () {
 			return {
 				btn: false,
+				date: getToDay(),
 				day: Number,
 				month: new Date().getMonth() + 1,
 				year: new Date().getFullYear(),
@@ -122,11 +123,25 @@
 				this.btn = true;
 			},
 			myday: function(day) {
-				this.day =day;
-				this.$els.input.value = this.year + '-' + this.month + '-' + this.day;
+				let now = new Date();
+				this.day = day;
+				if (this.day >= now.getDate() && this.year >= now.getFullYear() && this.month >= now.getMonth() + 1) {
+					this.date = this.year + '-' + this.month + '-' + this.day;
+				} else {
+					alert('请输入正确的截止日期');
+					return false;
+				}
 				this.btn = false;
 			}
 		}
+	}
+
+	function getToDay () {
+		 var now = new Date();
+		 var year = now.getFullYear(),
+		 	 month = now.getMonth() + 1,
+		 	 day = now.getDate() + 10;
+		 return year + '-' + month + '-' + day;
 	}
 </script>
 <style>
@@ -141,5 +156,5 @@
 	.date .table li.center{border-radius: 2rem;}
 	.date .table li.center:hover{background-color: #337ab7; color: #fff;}
 	.date .panel{margin-top: 1rem; position: absolute;}
-	.date .form-control{width: 20rem;}
+	.date .form-control{width: 20rem; background-color: #fff;}
 </style>

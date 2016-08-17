@@ -1,7 +1,6 @@
 <template>
 	<div class="n_radio question">
 		<h4>
-		{{title}}
 			<template v-if="type=='radio'">
 				Q{{index}} (单选题)
 			</template>
@@ -12,7 +11,7 @@
 				Q{{index}} (文本题)
 			</template>
 			<span>
-				<n_title :text.sync="title"></n_title>
+				<n_title :text.sync="h1"></n_title>
 			</span>
 		</h4>
 		<ul>
@@ -52,16 +51,14 @@
 	export default {
 		data () {
 			return {
-				title: 'abs',
+				h1: '请输入标题',
 				items: [],
 				required: false
 			}
 		},
 		props: {
 			index: Number,
-			type: String,
-			data: Array,
-			me: Object
+			type: String
 		},
 		components: {
 			n_title
@@ -73,12 +70,6 @@
 			pr_del: function (index) {
 				this.items.splice(index, 1);
 			}
-		},
-		ready: function () {
-			this.me['title'] = this.title;
-			this.me['items'] = this.items;
-			this.me['type'] = this.type;
-			this.me['required'] = this.required;
 		}
 	}
 </script>

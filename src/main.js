@@ -9,6 +9,7 @@ import Home from './components/home';
 import None from './components/404';
 import New from './components/new';
 
+vue.config.devtools = true;
 vue.use(Router);
 
 const router = new Router();

@@ -3,7 +3,7 @@
 		<n_title :text.sync="text" :class="'new-title'" :iclass="'form-control new-title'"></n_title>
 		<div class="content">
 			<div class="questions" v-for="t in que">
-				<question :index='$index+1' :type='t.type' :me.sync="t"></question>
+				<question :index='$index+1' :type='t.type' v-ref:sss></question>
 			</div>
 			<div class="adds">
 				<div class="btns" v-show="n_add_ts" transition="n_add_t">
@@ -24,11 +24,10 @@
 			<date></date>
 			<div class="btns">
 				<button class="btn btn-default btn-sm" type="button" @click="mes">保存问卷</button>
-				<button class="btn btn-default btn-sm" type="button">提交问卷</button>
+				<button class="btn btn-default btn-sm" type="button" @click="check">提交问卷</button>
 			</div>
 		</div>
-		{{que | json}}
-		<pop></pop>
+		<pop :on.sync="btn" :war="warning"></pop>
 	</div>
 </template>
 <script>
@@ -43,7 +42,11 @@ import question from './question';
 				text: '请输入标题',
 				n_add_ts: false,
 				que: [],
-				index: 1
+				data: [],
+				date: '',
+				index: 1,
+				btn: false,
+				warning: '!'
 			}
 		},
 		methods: {
@@ -63,7 +66,31 @@ import question from './question';
 				this.n_add_ts = false;
 			},
 			mes: function () {
-
+				this.data = [];
+				for (let i = 0; i < this.$children.length; i++) {
+					if (/question/.test(this.$children[i].$el.className)) {
+						let me = {};
+						me.h1 = this.$children[i].h1;
+						me.items = this.$children[i].items;
+						me.required = this.$children[i].required;
+						this.data.push(me);
+					}
+				}
+			},
+			c: function () {
+				this.btn = true;
+			},
+			check: function () {
+				this.mes();
+				for (let i = 0; i < this.data.length; i++) {
+					if (this.data[i].h1 == '请输入标题') {
+						this.warning = '请输入问题' + (i + 1) + '的标题';
+						this.btn = true;
+					} else if (this.data[i].items.length <= 1) {
+						this.warning = '每个问题至少两个';
+						this.btn = true;
+					}
+				}
 			}
 		},
 		components: {

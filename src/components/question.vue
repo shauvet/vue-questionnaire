@@ -1,6 +1,7 @@
 <template>
 	<div class="n_radio question">
 		<h4>
+		{{title}}
 			<template v-if="type=='radio'">
 				Q{{index}} (单选题)
 			</template>
@@ -11,21 +12,21 @@
 				Q{{index}} (文本题)
 			</template>
 			<span>
-				<n_title :text='"请输入标题"'></n_title>
+				<n_title :text.sync="title"></n_title>
 			</span>
 		</h4>
 		<ul>
 			<template v-for="item in items" v-if="type=='radio'">
 				<li>
 					<span class="glyphicon glyphicon-unchecked"></span>
-					<n_title :text="item.title" :class="''" :iclass="''"></n_title>
+					<n_title :text.sync="item.title" :class="''" :iclass="''"></n_title>
 					<span class="glyphicon glyphicon-remove" @click="pr_del($index)"></span>
 				</li>
 			</template>
 			<template v-for="item in items" v-if="type=='checkbox'">
 				<li>
 					<span class="glyphicon glyphicon-record"></span>
-					<n_title :text="item.title" :class="''" :iclass="''"></n_title>
+					<n_title :text.sync="item.title" :class="''" :iclass="''"></n_title>
 					<span class="glyphicon glyphicon-remove" @click="pr_del($index)"></span>
 				</li>
 			</template>
@@ -51,16 +52,16 @@
 	export default {
 		data () {
 			return {
-				items: [
-					{'title': '问题1'}，
-					{'title': '问题2'}
-				],
+				title: 'abs',
+				items: [],
 				required: false
 			}
 		},
 		props: {
 			index: Number,
-			type: String
+			type: String,
+			data: Array,
+			me: Object
 		},
 		components: {
 			n_title
@@ -72,6 +73,12 @@
 			pr_del: function (index) {
 				this.items.splice(index, 1);
 			}
+		},
+		ready: function () {
+			this.me['title'] = this.title;
+			this.me['items'] = this.items;
+			this.me['type'] = this.type;
+			this.me['required'] = this.required;
 		}
 	}
 </script>
@@ -90,4 +97,5 @@
 #new .content .questions .fun{position: absolute; bottom: 2rem; right: 1rem; height: 0; font-size: 1rem;}
 #new .content .questions .question h4{height: 2rem;}
 #new .content .questions .question input{width: auto; border: 0;}
+#new .content .questions>div.question>div.fun span{cursor: pointer;}
 </style>

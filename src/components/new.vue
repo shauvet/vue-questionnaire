@@ -1,9 +1,9 @@
 <template>
 	<div transition="gui" id="new">
-		<n_title :text='"请输入标题"'" :class="'new-title'" :iclass="'form-control new-title'"></n_title>
+		<n_title :text.sync="text" :class="'new-title'" :iclass="'form-control new-title'"></n_title>
 		<div class="content">
 			<div class="questions" v-for="t in que">
-				<question :index='$index+1' :type='t.type'></question>
+				<question :index='$index+1' :type='t.type' :me.sync="t"></question>
 			</div>
 			<div class="adds">
 				<div class="btns" v-show="n_add_ts" transition="n_add_t">
@@ -23,21 +23,24 @@
 		<div class="footer">
 			<date></date>
 			<div class="btns">
-				<button class="btn btn-default btn-sm" type="button">保存问卷</button>
+				<button class="btn btn-default btn-sm" type="button" @click="mes">保存问卷</button>
 				<button class="btn btn-default btn-sm" type="button">提交问卷</button>
 			</div>
 		</div>
 		{{que | json}}
+		<pop></pop>
 	</div>
 </template>
 <script>
 import n_title from './n_title';
+import pop from './pops';
 import date from './date';
 import question from './question';
 
 	export default {
 		data() {
 			return {
+				text: '请输入标题',
 				n_add_ts: false,
 				que: [],
 				index: 1
@@ -58,12 +61,16 @@ import question from './question';
 			textarea: function () {
 				this.que.push({'type': 'textarea'});
 				this.n_add_ts = false;
+			},
+			mes: function () {
+
 			}
 		},
 		components: {
 			question,
 			n_title,
-			date
+			date,
+			pop
 		}
 	}
 </script>
@@ -75,7 +82,7 @@ import question from './question';
 #new span.new-title:hover{background-color: #fff;}
 #new input.new-title{margin: 0; padding: 0; border: 0; text-align: center; font-size: 2.4rem; border: 0;}
 
-#new .content{margin-top: 1rem; margin-bottom: 1rem; padding: 2rem; border-top: .2rem solid #ccc; border-bottom: .2rem solid #ccc;}
+#new>.content{margin-top: 1rem; margin-bottom: 1rem; padding: 2rem; border-top: .2rem solid #ccc; border-bottom: .2rem solid #ccc;}
 #new .adds{margin-top: 1rem; border: .1rem solid #ccc;}
 #new .content .add{height: 8rem; line-height: 8rem; background-color: #ddd; color: #777; font-size: 2.4rem; text-align: center; cursor: pointer;}
 #new .content .adds .btns{position: relative; width: 20.5rem; margin: 1rem auto;}

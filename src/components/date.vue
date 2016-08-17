@@ -62,7 +62,7 @@
 			}
 		},
 		methods: {
-			add: function(d) {
+			add: function (d) {
 				if (d == 'y') {
 					this.year++;
 					this.datas();
@@ -77,7 +77,7 @@
 					}
 				}
 			},
-			subtract: function(d) {
+			subtract: function (d) {
 				if (d == 'y') {
 					this.year--;
 					this.datas();
@@ -92,7 +92,7 @@
 					}
 				}
 			},
-			datas: function() {
+			datas: function () {
 				let m = this.month - 1, y = this.year;
 				let one = weeks(y, m, 1);
 				let front = 0, after = 0;
@@ -122,7 +122,7 @@
 				}
 				this.btn = true;
 			},
-			myday: function(day) {
+			myday: function (day) {
 				let now = new Date();
 				this.day = day;
 				if (this.day >= now.getDate() && this.year >= now.getFullYear() && this.month >= now.getMonth() + 1) {
@@ -132,6 +132,10 @@
 					return false;
 				}
 				this.btn = false;
+				this.dispatch('date', this.date);
+			},
+			ready: function () {
+				this.dispatch('date', this.date);
 			}
 		}
 	}
@@ -140,7 +144,7 @@
 		 var now = new Date();
 		 var year = now.getFullYear(),
 		 	 month = now.getMonth() + 1,
-		 	 day = now.getDate() + 10;
+		 	 day = now.getDate();
 		 return year + '-' + month + '-' + day;
 	}
 </script>

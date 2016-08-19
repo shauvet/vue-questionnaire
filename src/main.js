@@ -8,6 +8,8 @@ import List from './components/list';
 import Home from './components/home';
 import None from './components/404';
 import New from './components/new';
+import See from './components/see';
+import Edit from './components/edit';
 
 vue.config.devtools = true;
 vue.use(Router);
@@ -30,6 +32,14 @@ router.map({
 	'/new': {
 		name: 'new',
 		component: New
+	},
+	'/see': {
+		name: 'see',
+		component: See
+	},
+	'/edit': {
+		name: 'edit',
+		component: Edit
 	}
 })
 router.redirect({

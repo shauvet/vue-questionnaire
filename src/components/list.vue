@@ -42,8 +42,35 @@
 	export default{
 		data() {
 			return {
-				item: a.read
+				item: [],
+				btn: false,
+				warning: '',
+				index: 0
 			}
+		},
+		methods: {
+			btndel: function (index) {
+				this.index = index;
+				this.btn = true;
+				this.warning = '是否要删除？';
+			},
+			del: function () {
+				data.del(this.index);
+				this.item = data.out();
+			}
+		},
+		ready: function () {
+			this.item = data.out();
+		},
+		components: {
+			pop
 		}
 	}
 </script>
+<style>
+	.panel .table tbody tr{transition: all .3s ease;}
+	.panel .table tbody tr:hover{background-color: #ddd;}
+	.panel .re{color: #4caf50;}
+	.panel .end{color: #e81818;}
+	.panel a{cursor: pointer;}
+</style>

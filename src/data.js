@@ -13,7 +13,6 @@ if (!window.localStorage.questionnaireData) {
 	function add(obj) {
 		data.push({
 			"title": obj.title,
-			"timeStart": obj.timeStart,
 			"timeEnd": obj.timeEnd,
 			"state": obj.state,
 			"sub": obj.sub
@@ -42,20 +41,23 @@ if (!window.localStorage.questionnaireData) {
 	localStorage.setTime('questionnaireData', JSON.stringify(data));
 }
 
-let a = JSON.parse(localStorage.getItem('questionnaireData'));
-
 export default {
-	out() {
-		return {
-			read: a,
-			add() {
-				data.push({
-					"title": obj.title,
-					"timeStart": obj.timeStart,
-					"timeEnd": obj.timeEnd,
-					"state": obj.state
-				})
-			}
-		}
+	out () {
+		return JSON.parse(localStorage.getItem('questionnaireData'));
+	},
+	add (obj) {
+		let a = JSON.parse(localStorage.getItem('questionnaireData'));
+		a.push(obj);
+		localStorage.setItem('questionnaireData', JSON.stringify(a));
+	},
+	del (index) {
+		let a = JSON.parse(localStorage.getItem('questionnaireData'));
+		a.splice(index, 1);
+		localStorage.setItem('questionnaireData', JSON.stringify(a));
+	},
+	update (index, data) {
+		let a = JSON.parse(localStorage.getItem('questionnaireData'));
+		a.splice(index, 1, data);
+		localStorage.setItem('questionnaireData', JSON.stringify(a));
 	}
 }

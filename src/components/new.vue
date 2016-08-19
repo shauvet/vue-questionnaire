@@ -3,7 +3,7 @@
 		<n_title :text.sync="text" :class="'new-title'" :iclass="'form-control new-title'"></n_title>
 		<div class="content">
 			<div class="questions" v-for="t in que">
-				<question :index='$index+1' :type='t.type' v-ref:sss></question>
+				<question :index='$index+1' :que.sync="t" :max="que.length"></question>
 			</div>
 			<div class="adds">
 				<div class="btns" v-show="n_add_ts" transition="n_add_t">
@@ -23,7 +23,7 @@
 		<div class="footer">
 			<date></date>
 			<div class="btns">
-				<button class="btn btn-default btn-sm" type="button" @click="mes">保存问卷</button>
+				<button class="btn btn-default btn-sm" type="button" @click="add">保存问卷</button>
 				<button class="btn btn-default btn-sm" type="button" @click="check">提交问卷</button>
 			</div>
 		</div>
@@ -31,6 +31,7 @@
 	</div>
 </template>
 <script>
+import datas from '../data';
 import n_title from './n_title';
 import pop from './pops';
 import date from './date';
@@ -42,9 +43,7 @@ import question from './question';
 				text: '请输入标题',
 				n_add_ts: false,
 				que: [],
-				data: [],
 				date: '',
-				index: 1,
 				btn: false,
 				warning: '!'
 			}
@@ -54,43 +53,112 @@ import question from './question';
 				this.n_add_ts = true;
 			},
 			radio: function () {
-				this.que.push({'type': 'radio'});
+				this.que.push({
+					'type': 'radio',
+					'title': '请输入标题',
+					'required': false,
+					'items': []
+				})
 				this.n_add_ts = false;
 			},
 			checkbox: function () {
-				this.que.push({'type': 'checkbox'});
+				this.que.push({
+					'type': 'checkbox',
+					'title': '请输入标题',
+					'required': false,
+					'items': []
+				});
 				this.n_add_ts = false;
 			},
 			textarea: function () {
-				this.que.push({'type': 'textarea'});
+				this.que.push({
+					'type': 'textarea',
+					'title': '请输入标题',
+					'required': false
+				});
 				this.n_add_ts = false;
 			},
-			mes: function () {
-				this.data = [];
-				for (let i = 0; i < this.$children.length; i++) {
-					if (/question/.test(this.$children[i].$el.className)) {
-						let me = {};
-						me.h1 = this.$children[i].h1;
-						me.items = this.$children[i].items;
-						me.required = this.$children[i].required;
-						this.data.push(me);
-					}
+			add: function () {
+				let _data = {};
+				_data.state = 'rel';
+				_data.timeEnd = this.date;
+				_data.title = this.text;
+				_data.que = this.que;
+				datas.add(_data);
+				this.$router.go('/list');
+			},
+			deep: function (index) {
+				let j = {},
+					p = [];
+				j.title = this.que[index].title;
+				j.type = this.que[index].type;
+				j.require = false;
+				for (let i = 0; i < this.que[index].items.length; i++) {
+					p.push({'title': this.que[index].items[i].title})
 				}
-			},
-			c: function () {
-				this.btn = true;
-			},
+				j.items = p;
+				return j;
+			}
 			check: function () {
-				this.mes();
-				for (let i = 0; i < this.data.length; i++) {
-					if (this.data[i].h1 == '请输入标题') {
+				var que = this.data.que;
+				if (que.length == 0) {
+					this.warning = '至少添加一个问题';
+					this.btn = true;
+					return false;
+				}
+				for (let i = 0; i < que.length; i++) {
+					if (que[i].title == '请输入标题' || que[i].title == '请重新填写') {
 						this.warning = '请输入问题' + (i + 1) + '的标题';
 						this.btn = true;
-					} else if (this.data[i].items.length <= 1) {
-						this.warning = '每个问题至少两个';
-						this.btn = true;
+						return false;
+					} else if (que[i].items) {
+
+						if (que[i].items.length <= 1) {
+							this.warning = '每个问题至少两个选项';
+							this.btn = true;
+							return false;
+						} else if (que[i].items.length >= 2) {
+							for (let j = 0; j < que[i].items.length; j++) {
+								if (que[i].items[j] === '请重新填写') {
+									this.warning = '请重新输入第' + (i + 1) + '问题的第' + (j + 1) + '个选项';
+									this.btn = true;
+									return false;
+								}
+							}
+						}
 					}
 				}
+				let _data = {};
+				_data.state = 'on';
+				_data.timeEnd = this.date;
+				_date.title = this.text;
+				_data.que = this.que;
+				datas.add(_data);
+				this.$router.go('list');
+			}
+		},
+		events: {
+			overlap: function (index) {
+				var j = this.deep(index-1);
+				this.que.push(j);
+			},
+			moveDown: function (index) {
+				let a = this.deep(index-1);
+				let b = this.deep(index);
+				this.que.splice(index-1, 1);
+				this.que.splice(index, 1, a);
+			},
+			moveUp: function (index) {
+				let a = this.deep(index-2);
+				let b = this.deep(index-1);
+				this.que.splice(index-2, 1);
+				this.que.splice(index, -1, a);
+			},
+			del: function (index) {
+				this.que.splice(index-1, 1);
+			},
+			date: function (date) {
+				this.date = date;
 			}
 		},
 		components: {

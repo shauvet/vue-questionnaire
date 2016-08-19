@@ -8,9 +8,13 @@
 				{{war}}
 			</div>
 			<div class="select">
-				<button type="button" class="btn btn-primary btn-block" @click="c">
+				<button type="button" class="btn btn-primary" @click="c">
 					<span class="glyphicon glyphicon-ok"></span>
 					确定
+				</button>
+				<button type="button" class="btn btn-primary" @click="e" v-if="single">
+					<span class="glyphicon glyphicon-remove"></span>
+					取消
 				</button>
 			</div>
 		</div>
@@ -21,11 +25,20 @@
 
 		props: {
 			on: Boolean,
-			war: String
+			war: String,
+			single: Boolean,
+			confirm: Function
 		},
 		methods: {
 			c: function () {
 				this.on = false;
+				if (this.confirm) {
+					this.confirm();
+				}
+			},
+			e: function () {
+				this.on = false;
+				return false;
 			}
 		}
 	}
@@ -36,6 +49,7 @@
 	.pop>div.pop-content .pop-top h1{margin: 0; font-size: 2.4rem;}
 	.pop>div.pop-content .pop-top{background-color: #337ab7; color: #fff; padding: 1rem 1.5rem; border-bottom: .1rem solid #337a7b; border-top-left-radius: .3rem; border-top-right-radius: .3rem;}
 	.pop>div.pop-content .content{line-height: 9rem; text-align: center; font-size: 1.6rem;}
-	.pop>div.pop-content .select{width: 8rem; margin: 0 auto;}
+	.pop>div.pop-content .select{margin: 0 auto; text-align: center;}
+	.pop>div.pop-content .select .btn{display: table-cell;}
 	.modal-enter, .modal-leave{opacity: 0; transform: scale(1.1);}
 </style>

@@ -7,7 +7,7 @@
 					<tr>
 						<th></th>
 						<th>标题</th>
-						<th>时间</th>
+						<th>截止日期</th>
 						<th>状态</th>
 						<th>操作</th>
 					</tr>
@@ -16,23 +16,27 @@
 					<tr v-for="item in items">
 						<th><input type="checkbox"></th>
 						<th>{{item.title}}</th>
-						<th>{{item.timeStart}}</th>
-						<th v-if="item.state==rel">已发布</th>
-						<th v-if="item.state==on" class="re">发布中</th>
+						<th>{{item.timeEnd}}</th>
+						<th v-if="item.state==on">已发布</th>
+						<th v-if="item.state==rel" class="re">未发布</th>
 						<th v-if="item.state==end" class="end">结束</th>
 						<th>
-							<a href="">编辑</a>
-							<a href="">删除</a>
-							<a href="">查看数据</a>
+							<a v-link="name: 'edit', params: {id: $index}">编辑</a>
+							<a @click="btndel($index)">删除</a>
+							<a v-link="name: 'see', params: {id: $index}" v-if="test.state=='rel'">查看问卷</a>
+							<a v-link="name: 'edit', params: {id: $index}" v-if="test.state=='end' || test.state=='on'">查看数据</a>
 						</th>
 					</tr>
 				</tbody>
 			</table>
+			<pop :on.sync="btn" :war="warning" :confirm="del" :single="true"></pop>
 		</div>
 	</div>
 </template>
 <script>
-	import data from '../data.js';
+	import data from '../data';
+	import see from './see';
+	import pop from './pops';
 
 	let a = data.out()
 	export default{

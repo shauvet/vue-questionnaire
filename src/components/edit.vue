@@ -35,7 +35,7 @@
 	</div>
 </template>
 <script>
-	import datas from '../data.js';
+	import datas from '../data';
 	import n_title from './n_title';
 	import pop from './pops';
 	import date from './date';
@@ -182,63 +182,17 @@
 </script>
 <style>
 	/* 过渡效果 */
-    .n_add_t-transition {
-      transition: height .3s ease;
-      height: 30px;
-      overflow: hidden;
-    }
+    .n_add_t-transition {transition: height .3s ease; height: 3rem; overflow: hidden;}
     /* .expand-enter 定义进入的开始状态 */
     /* .expand-leave 定义离开的结束状态 */
-    .n_add_t-enter, .n_add_t-leave {
-      height: 0;
-      opacity: 0;
-    }
+    .n_add_t-enter, .n_add_t-leave {height: 0; opacity: 0;}
     /*  new  */
-    #edit  span.edit-title{
-        display: block;
-        margin:0;
-        height: 34px;
-        padding-top: 2px;
-        line-height: 1.42857143;
-        text-align: center;
-        font-size: 24px;
-    }
-    #edit  span.edit-title:hover{
-        background: #fff;
-    }
-    #edit  input.edit-title{
-        margin: 0;
-        padding:0;
-        text-align: center;
-        font-size: 24px;
-        border :0;
-    }
-    #edit>.content {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        padding:20px;
-        border-top: 2px solid #ccc;
-        border-bottom: 2px solid #ccc;
-    }
-    #edit .adds {
-        margin-top: 10px;
-        border: 1px solid #ccc;
-    }
-    #edit .content .add{
-        height: 80px;
-        line-height: 80px;
-        background:#ddd;
-        color: #777;
-        font-size: 24px;
-        text-align: center;
-        cursor: pointer;
-    }
-    #edit .content .adds .btns {
-        position: relative;
-        width: 205px;
-        margin: 10px auto 10px auto;
-    }
-    #edit .footer .btns {
-        float: right;
-    }
+    #edit  span.edit-title{display: block;margin:0;height: 3.4rem;padding-top: .2rem;line-height: 1.5;text-align: center;font-size: 2.4rem;}
+    #edit  span.edit-title:hover{background: #fff;}
+    #edit  input.edit-title{margin: 0;padding:0;text-align: center;font-size: 2.4rem;border :0;}
+    #edit>.content {margin-top: 1rem;margin-bottom: 1rem;padding:2rem;border-top: .2rem solid #ccc;border-bottom: .2rem solid #ccc;}
+    #edit .adds {margin-top: 1rem;border: .1rem solid #ccc;}
+    #edit .content .add{height: 8rem;line-height: 8rem;background:#ddd;color: #777;font-size: 2.4rem;text-align: center;cursor: pointer;}
+    #edit .content .adds .btns {position: relative;width: 20.5rem;margin: 1rem auto;}
+    #edit .footer .btns {float: right;}
 </style>

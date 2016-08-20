@@ -15,7 +15,7 @@ if (!window.localStorage.questionnaireData) {
 			"title": obj.title,
 			"timeEnd": obj.timeEnd,
 			"state": obj.state,
-			"sub": obj.sub
+			"que": obj.que
 		})
 	}
 
@@ -24,18 +24,64 @@ if (!window.localStorage.questionnaireData) {
         timeStart: "2015-1-1",
         timeEnd: "2015-2-2",
         state: "on",
-        sub: [{
-        	title: '测试标题',
-        	option: [
-        		"test"
+        que: [{
+        	type: 'checkbox',
+        	title: '你最常使用的框架或库是什么？',
+        	required: false,
+        	items: [
+        		{
+        			title: 'react',
+        			num: 21
+        		},
+        		{
+        			title: 'vue',
+        			num: 21
+        		},
+        		{
+        			title: 'angular',
+        			num: 21
+        		},
+        		{
+        			title: 'jquery',
+        			num: 30
+        		},
+        		{
+        			title: 'bootstrap',
+        			num: 40
+        		}
         	]
+        },
+        {
+        	type: 'radio',
+        	title: '你觉得哪个框架或库的学习难度最大？',
+        	required: false,
+        	items: [
+        		{
+        			title: 'react',
+        			num: 22
+        		},
+        		{
+        			title: 'vue',
+        			num: 22
+        		},
+        		{
+        			title: 'angular',
+        			num: 22
+        		},
+        		{
+        			title: 'jquery',
+        			num: 33
+        		},
+        		{
+        			title: 'bootstrap',
+        			num: 44
+        		}
+        	]
+        },{
+        	type: 'textarea',
+        	title: '说出你为什么喜欢这个框架或库',
+        	required: false
         }]
-	})
-	add({
-		title: "hello",
-		timeStart: "2016-1-1",
-		timeEnd: "2016-2-2",
-		state: "end"
 	})
 
 	localStorage.setTime('questionnaireData', JSON.stringify(data));

@@ -9,6 +9,7 @@ import Home from './components/home';
 import None from './components/404';
 import New from './components/new';
 import See from './components/see';
+import Static from './components/statistics';
 import Edit from './components/edit';
 
 vue.config.devtools = true;
@@ -37,9 +38,13 @@ router.map({
 		name: 'see',
 		component: See
 	},
-	'/edit': {
+	'/edit/:id': {
 		name: 'edit',
 		component: Edit
+	},
+	'/static/:id': {
+		name: 'static',
+		component: Static
 	}
 })
 router.redirect({

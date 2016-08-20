@@ -21,10 +21,10 @@
 						<th v-if="item.state==rel" class="re">未发布</th>
 						<th v-if="item.state==end" class="end">结束</th>
 						<th>
-							<a v-link="name: 'edit', params: {id: $index}">编辑</a>
+							<a v-link="name: 'edit', params: {id: $index}" v-if="item.state=='rel'">编辑</a>
 							<a @click="btndel($index)">删除</a>
-							<a v-link="name: 'see', params: {id: $index}" v-if="test.state=='rel'">查看问卷</a>
-							<a v-link="name: 'edit', params: {id: $index}" v-if="test.state=='end' || test.state=='on'">查看数据</a>
+							<a v-link="name: 'see', params: {id: $index}" v-if="item.state=='rel' || item.state=='on'">查看问卷</a>
+							<a v-link="name: 'static', params: {id: $index}" v-if="item.state=='end' || item.state=='on'">查看数据</a>
 						</th>
 					</tr>
 				</tbody>

@@ -180,6 +180,6 @@ import question from './question';
 #new>.content{margin-top: 1rem; margin-bottom: 1rem; padding: 2rem; border-top: .2rem solid #ccc; border-bottom: .2rem solid #ccc;}
 #new .adds{margin-top: 1rem; border: .1rem solid #ccc;}
 #new .content .add{height: 8rem; line-height: 8rem; background-color: #ddd; color: #777; font-size: 2.4rem; text-align: center; cursor: pointer;}
-#new .content .adds .btns{position: relative; width: 20.5rem; margin: 1rem auto;}
+#new .content .adds .btns{position: relative; width: 22rem; margin: 1rem auto;}
 #new .footer .btns{float: right;}
 </style>

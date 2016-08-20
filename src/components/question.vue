@@ -67,7 +67,7 @@
 		},
 		methods: {
 			pr_add: function () {
-				this.que.items.push({'title': '问题'});
+				this.que.items.push({'title': '问题', 'num': 0});
 			},
 			pr_del: function (index) {
 				this.que.items.splice(index, 1);

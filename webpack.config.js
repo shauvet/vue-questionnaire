@@ -5,7 +5,7 @@ module.exports = {
 	output: {
 		path: './dist',
 		filename: '[name].js',
-		public: '/dist/'
+		publicPath: '/dist/'
 	},
 
 	module: {
@@ -22,6 +22,9 @@ module.exports = {
 	},
 
 	resolve: {
-		extensions: ['', 'js', 'vue']
+		extensions: ['', 'js', 'vue'],
+		alias: {
+			vue: '../dist/vue/vue.min.js'
+		}
 	}
 }

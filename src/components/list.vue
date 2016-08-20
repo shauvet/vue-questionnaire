@@ -5,7 +5,7 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th></th>
+						<th><input type="checkbox"></th>
 						<th>标题</th>
 						<th>截止日期</th>
 						<th>状态</th>
@@ -14,7 +14,7 @@
 				</thead>
 				<tbody>
 					<tr v-for="item in items">
-						<th><input type="checkbox"></th>
+						<th><input type="checkbox" name="question"></th>
 						<th>{{item.title}}</th>
 						<th>{{item.timeEnd}}</th>
 						<th v-if="item.state==on">已发布</th>

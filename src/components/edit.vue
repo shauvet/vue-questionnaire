@@ -136,12 +136,12 @@
 			},
 			deep: function () {
 				let j = {}, p = [];
-				j.title = this.que[index].title;
-				j.type = this.que[index].type;
+				j.title = this.data.que[index].title;
+				j.type = this.data.que[index].type;
 				j.required = false;
-				for (let i = 0; i < this.que[index].items.length; i++) {
+				for (let i = 0; i < this.data.que[index].items.length; i++) {
 					p.push({
-						'title': this.que[index].items.title;
+						'title': this.data.que[index].items.title;
 					})
 				}
 				j.items = p;
@@ -151,25 +151,25 @@
 		events: {
 			overlap: function (index) {
 				var j = this.deep(index-1);
-				this.que.push(j);
+				this.data.que.push(j);
 			},
 			moveDown: function (index) {
 				let a = this.deep(index-1);
 				let b = this.deep(index);
-				this.que.splice(index-1, 1);
-				this.que.splice(index, 1, a);
+				this.data.que.splice(index-1, 1);
+				this.data.que.splice(index, 0, a);
 			},
 			moveUp: function (index) {
 				let a = this.deep(index-2);
 				let b = this.deep(index-1);
-				this.que.splice(index-2, 1);
-				this.que.splice(index, -1, a);
+				this.data.que.splice(index-2, 1);
+				this.data.que.splice(index, -1, a);
 			},
 			del: function (index) {
-				this.que.splice(index-1, 1);
+				this.data.que.splice(index-1, 1);
 			},
 			date: function (date) {
-				this.date = date;
+				this.data.date = date;
 			}
 		},
 		components: {

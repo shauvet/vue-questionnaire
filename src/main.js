@@ -1,16 +1,15 @@
 import vue from 'vue';
 import Router from 'vue-router';
-
 import data from './data';
 
+import See from './components/see';
+import Static from './components/statistics';
+import Edit from './components/edit';
 import App from './components/app';
 import List from './components/list';
 import Home from './components/home';
 import None from './components/404';
 import New from './components/new';
-import See from './components/see';
-import Static from './components/statistics';
-import Edit from './components/edit';
 
 vue.config.devtools = true;
 vue.use(Router);
@@ -24,7 +23,7 @@ router.map({
 	},
 	'/404': {
 		name: '404',
-		component: none
+		component: None
 	},
 	'/list': {
 		name: 'list',
@@ -34,7 +33,7 @@ router.map({
 		name: 'new',
 		component: New
 	},
-	'/see': {
+	'/see/:id': {
 		name: 'see',
 		component: See
 	},

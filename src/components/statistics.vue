@@ -1,5 +1,5 @@
 <template>
-	<div id="statistics">
+	<div id="statistics" transition="gui">
 		<h1 class="txt">{{data.title}}</h1>
 		<div v-for="q in data.que">
 			<echarts :data="q" :index="$index+1"></echarts>

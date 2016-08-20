@@ -92,10 +92,14 @@ import question from './question';
 					p = [];
 				j.title = this.que[index].title;
 				j.type = this.que[index].type;
-				j.require = false;
-				for (let i = 0; i < this.que[index].items.length; i++) {
+				j.require = this.que[index].require;
+
+				if (this.que[index].items) {
+					for (let i = 0; i < this.que[index].items.length; i++) {
 					p.push({'title': this.que[index].items[i].title})
 				}
+				}
+				
 				j.items = p;
 				return j;
 			}
@@ -146,7 +150,7 @@ import question from './question';
 				let a = this.deep(index-1);
 				let b = this.deep(index);
 				this.que.splice(index-1, 1);
-				this.que.splice(index, 1, a);
+				this.que.splice(index, 0, a);
 			},
 			moveUp: function (index) {
 				let a = this.deep(index-2);

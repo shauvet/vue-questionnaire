@@ -20,9 +20,8 @@ if (!window.localStorage.questionnaireData) {
 	}
 
 	add({
-		title: "你好",
-        timeStart: "2015-1-1",
-        timeEnd: "2015-2-2",
+		title: "js框架使用状况",
+        timeEnd: "2016-8-2",
         state: "on",
         que: [{
         	type: 'checkbox',

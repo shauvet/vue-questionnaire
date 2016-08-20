@@ -36,9 +36,9 @@
 	</div>
 </template>
 <script>
-	let fts = [],
-		cts = [],
-		ats = [];
+	let fts = new Array(),
+		cts = new Array(),
+		ats = new Array(),
 	let weeks = function(y, m, d) {
 		var r = new Date(y, m, d).getDay();
 		return r;
@@ -93,6 +93,17 @@
 				}
 			},
 			datas: function () {
+				function weeks(y,w,d){
+                    var x = new Date(y,w,d).getDay();
+                    return x ;
+                }
+                function days(y,w){
+                    var x  = new Date(y,w,0).getDate();
+                    return x;
+                }
+                this.ft = [];
+                this.ct = [];
+                this.at = [];
 				let m = this.month - 1, y = this.year;
 				let one = weeks(y, m, 1);
 				let front = 0, after = 0;
@@ -150,7 +161,7 @@
 </script>
 <style>
 	.date{display: inline-block;}
-	.date .date-panel{width: 34rem; height: 37rem; text-align: center;}
+	.date .date-panel{width: 34rem; text-align: center;}
 	.date .date-panel-head{font-size: 2.4rem;}
 	.date .table ul{padding: 0; margin: 0;}
 	.date .table ul li{width: 3rem; height: 3rem; margin: 0.7rem; line-height: 3rem; transition: .3s; text-align: center; cursor: pointer; margin-top: .7rem; font-size: 2rem; display: inline-block;}
